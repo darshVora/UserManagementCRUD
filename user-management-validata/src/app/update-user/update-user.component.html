@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-11 d-flex align-items-center justify-content-center">
+              <h4><b>Update User</b></h4>
+            </div>
+            <div class="col-sm-1">
+              <a href="#" routerLink="/users" class="btn btn-success back"><i class='fas fa-arrow-circle-left'></i>
+                 Back</a>
+            </div>
+          </div>
+        </div>
+        <form #userForm="ngForm">
+          <div class="table-content">
+            <div class="row g-3 align-items-center mt-1">
+              <div class="col-sm-3">
+                <label for="FirstName" class="p-t-b-10">First Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="FirstName" required maxlength="255"
+                  [(ngModel)]="updateUserForm.FirstName" name="FirstName" #FirstName="ngModel">
+                <div *ngIf="FirstName.errors && isSubmitted" class="alert alert-danger validationError mt-1">
+                  <div [hidden]="!FirstName.errors?.['required']">
+                    First Name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center mt-1">
+              <div class="col-sm-3">
+                <label for="LastName" class="p-t-b-10">Last Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="LastName" required maxlength="255"
+                  [(ngModel)]="updateUserForm.LastName" name="LastName" #LastName="ngModel">
+                <div *ngIf="LastName.errors && isSubmitted" class="alert alert-danger validationError mt-1">
+                  <div [hidden]="!LastName.errors?.['required']">
+                    Last Name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center mt-1">
+              <div class="col-sm-3">
+                <label for="Email" class="form-label">Email<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="Email" required maxlength="255"
+                  [(ngModel)]="updateUserForm.Email" name="Email" #Email="ngModel"
+                  pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,3}$">
+                <div *ngIf="Email.errors && isSubmitted" class="alert alert-danger validationError mt-1">
+                  <div [hidden]="!Email.errors?.['required']">
+                    Email is required
+                  </div>
+                  <div [hidden]="!Email.errors?.['touched'] && !Email.errors?.['pattern']">
+                    Email is invalid
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center mt-1">
+              <div class="col-sm-3">
+                <label for="Password" class="form-label">Password<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="Password" required maxlength="255"
+                  [(ngModel)]="updateUserForm.Password" name="Password" #Password="ngModel">
+                  <div *ngIf="LastName.errors && isSubmitted" class="alert alert-danger validationError mt-1">
+                    <div [hidden]="!Password.errors?.['required']">
+                      Password is required
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row g-3 align-items-center mt-1">
+              <div class="col-sm-3">
+                <label for="Role" class="form-label">Role<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <select [(ngModel)]="updateUserForm.RoleId" id="Role" name="Role" required class="form-select">
+                    <option *ngFor="let key of roles" [value]="key" >{{enums[key]}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="table-footer d-flex align-items-center justify-content-center mt-4">
+            <button class="btn btn-success" (click)="AddUser(userForm.form.valid)">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
